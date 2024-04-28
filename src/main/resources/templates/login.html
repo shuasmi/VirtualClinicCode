@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+   
+    <title th:text="${title}"></title>
+    <style>
+      body{
+    margin: 0;
+    padding: 0;
+    background-image: url('/img/photo-modified.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center 5%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0,0,0,0.8); /* Background color */
+}
+
+.logincontent{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.formdesign{
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 400px; /* Set maximum width for better responsiveness */
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #007bff; /* Blue border */
+    background-color: #f3f3f3; /* Cream color background */
+    color: #495057; /* Input text color */
+}
+
+.btn-login {
+    padding: 10px;
+    border-radius: 5px;
+    border: 2px solid #007bff; /* Blue outline */
+    background-color: transparent; /* Transparent background */
+    color: #007bff; /* Text color */
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-login:hover {
+    background-color: #007bff; /* Change background color on hover */
+    color: #fff; /* Change text color on hover */
+}
+      
+    </style>
+</head>
+<body>
+
+<div class="logincontent">
+    <div class="formdesign" style="background-color: lightgray;">
+        <h2 class="text-center mb-4" style="color:black;">Login</h2>
+        
+    <form th:action="@{/saiclinic/login}" action="#" method="post">
+    <div th:if="${param.error}" class="alert alert-danger">
+    	<b>Invalid Username and Password</b>
+    </div>
+     <div th:if="${param.logout}" class="alert alert-success">
+   		<b>You have been logout</b>
+    </div>
+        <div class="mb-3">
+            <label for="username" class="form-label" style="color:black;"><b>Username</b></label>
+            <input type="text" class="form-control" id="username" name="username" required>
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label" style="color:black;"><b>Password</b></label>
+            <input type="password" class="form-control" id="password" name="password" required>
+        </div>
+        <div class="my-2" style="color:red;">
+       	Forgot Password ?<a th:href="@{/saiclinic/forgotpassword}">click here</a>
+        </div>
+        
+        <div class="text-center">
+        <button type="submit" class="btn btn-outline-dark">Login</button>
+        </div>
+    </form>
+    </div>
+</div>
+
+</body>
+</html>

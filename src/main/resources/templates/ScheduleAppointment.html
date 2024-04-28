@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title th:text="${title}"></title>
+  <!-- Add Bootstrap CSS link here -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+       background-image:url("/img/scheduleback.jpg");
+            background-size: cover;
+	 /* or contain, or specific values */
+   			background-repeat: no-repeat;
+   			background-position: center center; 
+             /* Add the path to your background image */
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <h2 class="text-center mb-4">Book Appointment</h2>
+      <form th:action="@{/Receptionist/SuccessAppointment}" method="post" th:object="${BookAppointment}">
+        <div class="form-group">
+          <label for="patientName">Patient Name</label>
+          <input type="text" class="form-control" id="patientName" th:value="${BookAppointment.patientName}" placeholder="Enter patient name" name="patientName" required>
+          <p th:each="e : ${#fields.errors('patientName')}" th:text="${e}" style="color:red;"></p>
+        </div>
+        <div class="form-group">
+          <label for="scheduleTime">Schedule Time</label>
+          <input type="text" class="form-control" id="scheduleTime" th:value="${BookAppointment.scheduleTime}" placeholder="Enter schedule time" name="scheduleTime" required>
+          <p th:each="e : ${#fields.errors('scheduleTime')}" th:text="${e}" style="color:red;"></p>
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlSelect1">Consultation</label>
+            <select class="form-control" id="exampleFormControlSelect1" name="consultation">
+                <option value="Ayurvedic">Ayurvedic</option>
+                <option value="Alopathy">Alopathy</option>
+                
+            </select>
+        </div>
+        <div class="form-group">
+          <label for="email">Patient Email</label>
+          <input type="email" class="form-control" id="scheduleTime" th:value="${BookAppointment.email}" placeholder="Enter Patient Email" name="email" required>
+          <p th:each="e : ${#fields.errors('email')}" th:text="${e}" style="color:red;"></p>
+        </div>
+        <button type="submit" class="btn btn-outline-primary btn-block">Schedule</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Add Bootstrap JS and Popper.js scripts here -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+</body>
+</html>

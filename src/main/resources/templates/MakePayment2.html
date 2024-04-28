@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Make Payment</title>
+	 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+	 <style>
+    body {
+      display: flex;
+      min-height: 100vh;
+      align-items: center;
+      justify-content: center;
+      background-color: #f8f9fa;
+    }
+
+    .payment-container {
+      background-color: #ffffff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+  </style>
+</head>
+<body>
+	<section>
+	<h1 class="text-center">Make Payment</h1>
+	
+<div class="container payment-container">
+ 
+ <div class="text-center">
+ <h4>Doctor Fee : 80</h4>
+ </div>
+ 
+ <div class="text-center">
+ <h4>Platform Fee : 20</h4>
+ </div>
+  
+  <div class="row">
+    <div class="col-md-12 text-center mt-4">
+      <h4>Total: 100.00</h4>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12 text-center mt-4 mb-2">
+    
+      <button onclick="paymentStart(100)" class="btn btn-primary">Proceed to Payment</button>
+      
+    </div>
+  </div>
+</div>
+	</section>
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+	<script>
+    const paymentStart = (amount) => {
+        console.log("Payment started....");
+        console.log(amount);
+
+        //code..
+        //we will use ajax to send request to server to create order- jquery
+
+        $.ajax({
+            url: '/Patient/create_order', // Corrected URL assignment
+            data: JSON.stringify({amount: amount, info: 'order_request'}),
+            contentType: 'application/json',
+            type: 'POST',
+            dataType: 'json',
+            success: function(response) {
+                //invoked when success
+                console.log(response)
+                
+                if(response.status == "created")
+                {
+                	//open payment from
+                	let options={
+                		key:'rzp_test_QJA1JAIynqVJBn',
+                		amount:100,
+                		currency:'INR',
+                		name:'Doctors Fee',
+                		description:'Fees',
+                		order_id:response.id,
+                		
+                		handler:function(response){
+                			console.log(response.razorpay_payment_id);
+                			console.log(response.razorpay_order_id);
+                			console.log(response.razorpay_signature);
+                			console.log('payment successfull');
+                			updatePaymentOnServer(response.razorpay_payment_id,response.razorpay_order_id,'paid');
+                			
+                		},
+                		
+                		prefill:{
+                			name:"",
+                			email:"",
+                			contact:""
+                		},
+                		
+                		notes:{
+                			address:"Sai clinic",
+                			
+                		},
+                		
+                		theme:{
+                			color:"#3399cc",
+                		},
+                		
+                		
+                	};
+                	
+                	let rzp=new Razorpay(options);
+                	
+                	rzp.on("payment.failed",function (response){
+                		console.log(response.error.code);
+                		console.log(response.error.description);
+                		console.log(response.error.source);
+                		console.log(response.error.step);
+                		console.log(response.error.reason);
+                		console.log(response.error.metadata.order_id);
+                		console.log(response.error.metadata.payment_id);
+                		alert("Oops payment failed");
+                	});
+                	
+                	rzp.open()
+                }
+            },
+            error: function(error) {
+                //invoked when error
+                console.log(error)
+                alert("something went wrong !!")
+            }
+        });
+    };
+    
+    function updatePaymentOnServer(payment_id,order_id,status)
+    {
+    	$.ajax({
+    	
+    		url: '/Patient/update_order', 
+            data: JSON.stringify({payment_id:payment_id,order_id:order_id,status:status}),
+            contentType: 'application/json',
+            type: 'POST',
+            dataType: 'json',
+            success:function(response){
+            	window.location.href = "/Patient/PaymentGateway";
+            
+            },
+            
+            error:function(error){
+            
+            	alert("Something went wrong !!");
+            },
+    		
+    	})
+    }
+</script>
+</body>
+</html>

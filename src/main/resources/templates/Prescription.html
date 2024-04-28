@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Centered Bootstrap Form</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+            body {
+      background-color: #f8f9fa;
+      height: 100vh;
+    }
+       .center-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+  
+  <div class="center-container">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title text-center">Prescription</h5>
+                 <form th:action="@{/Doctors/PrescriptionDetails}" method="post" th:object="${PrescriptionDetails}">
+        <div class="form-group">
+                <label>Patient Name</label>
+                <input type="text" class="form-control" id="patientName" name="patientName" th:value="${PrescriptionDetails.patientName}" placeholder="Patient Name">
+                <p th:each="e : ${#fields.errors('patientName')}" th:text="${e}" style="color:red;"></p>
+            </div>
+          
+            <div class="form-group">
+                <label>Medcines</label>
+               	<textarea class="form-control" id="medicines" name="Medicines" th:value="${PrescriptionDetails.Medicines}" rows="3" placeholder="Enter medicines"></textarea>
+               	<p th:each="e : ${#fields.errors('Medicines')}" th:text="${e}" style="color:red;"></p>
+            </div>
+            <!-- Submit button -->
+            <div class="text-center">
+            <button type="submit" class="btn btn-outline-primary">Submit</button>
+            </div>
+        </form>
+            </div>
+        </div>
+    </div>
+  
+  
+</body>
+</html>
+
+ 

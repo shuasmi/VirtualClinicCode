@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8" />
+	<title>Video Page</title>
+	<link rel="stylesheet" href="" th:href="@{/css/VidStyle.css}" type="text/css"/>
+</head>
+<body>
+	
+	<div id="videos">
+		<video class="video-player" id="user-1" autoplay playsinline></video>
+		<video class="video-player" id="user-2" autoplay playsinline></video>
+	</div>
+	
+	<div id="controls">
+		
+		<div class="control-container" id="camera-btn">
+			<img th:src="@{/img/camera.png}"/>
+		</div>
+		
+		<div class="control-container" id="mic-btn">
+			<img th:src="@{/img/mic.png}"/>
+		</div>
+		
+		<a th:href="@{/Doctors/Prescription}">
+			<div class="control-container" id="leave-btn">
+				<img th:src="@{/img/phone.png}"/>
+			</div>
+		</a>
+		
+	</div>
+	
+</body>
+<script th:src="@{/js/agora-rtm-sdk-1.5.1.js}"></script>
+ <script th:src="@{/js/vidj.js}"></script>
+</html>

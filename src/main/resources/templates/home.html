@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{base::layout(~{::section})}">
+<head>
+	<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+	<title>Home Page</title>
+	 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	 <link rel="stylesheet" href="" th:href="@{/css/style.css}" type="text/css"/>
+	
+	
+	
+</head>
+<body>
+
+	<section>
+	
+  		<div class="homeimg">
+      <img src="img/img3_reno.jpg" class="d-block w-100" alt="..." th:src="@{/img/home2.webp}" height="500px" width="500px">
+      <div class="homecontent text-center">
+      	<h3>OUR MOTTO</h3>
+      	<p>DEDICATED TO HUMANITY AND COMMITTED TO CARE</p>
+      	<a href="#" th:href="@{/saiclinic/Patients}" class="btn btn-outline-success">Our Services</a>
+      </div>
+      </div>
+ 
+  
+ 
+<div class="docintro">
+<div class="text-center mx-4 ">
+<h1 style="color:rgb(35, 168, 221);">Our Doctors</h1>
+</div>
+ 
+ <div class="fullbox d-flex flex-wrap justify-content-center">
+
+
+
+<div class="box">
+<img th:src="@{/img/asmita2.jpg}">
+
+
+<div class="box-content">
+	
+	<b>Name: </b>Asmita Ravindra Baraskar<br>
+    <b>Qualification: </b>Bachelor in Ayurveda<br>
+    <b>Speciality: </b>Ayurvedic
+
+</div>
+</div>
+
+
+
+<div class="box2">
+<img th:src="@{/img/amol3.jpg}">
+
+
+<div class="box-content2">
+	
+	<b>Name: </b>Amol Ashok Patil<br>
+    <b>Qualification: </b>MD in Medicine<br>
+    <b>Speciality: </b>Alopathy
+
+</div>
+</div>
+</div>
+
+</div>
+
+<div class="containerhome mx-4 my-4">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="testimonial-card">
+                <p class="testimonial-text">"As someone with a busy schedule, the virtual clinic has been a lifesaver for me. I've received prompt and effective treatment for my health issues without having to wait in long queues or take time off work. Highly recommend!"</p>
+                <img th:src="@{/img/dhruv.jfif}" alt="John Doe" class="testimonial-image">
+                <p class="testimonial-author">Dhruv Chitroda</p>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="testimonial-card">
+                <p class="testimonial-text">"I was initially skeptical about virtual consultations, but after my first appointment with the doctor at this clinic, I was pleasantly surprised. The video call was seamless, and the doctor was awesome and he's nature was so good. "</p>
+                <img th:src="@{/img/adimod.png}"  alt="Jane Smith" class="testimonial-image">
+                <p class="testimonial-author">Aditya Chapale</p>
+            </div>
+        </div>
+    </div>
+</div>
+	
+	</section>
+	
+	
+	
+</body>
+</html>

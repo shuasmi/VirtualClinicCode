@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{base::layout(~{::section})}">
+<head>
+	<meta charset="UTF-8" />
+	
+	 
+	<title>Ayurvedic Consultation</title>
+	<link rel="stylesheet" href="" th:href="@{/css/style.css}" type="text/css"/>
+	
+	
+</head>
+<body>
+	<section>
+	<div class="ayurbackimg">
+
+<div class="containerayur center-container">
+    <div class="card custom-card" style="background-color: tomato; ">
+      <div class="card-header text-center">
+
+        <h5 class="card-title" style="color: #fff;">Book Appoinment</h5>
+      </div>
+      <div class="card-body">
+        <form th:action="@{/email/verify}" method="post" th:object="${PatientDetails}">
+    
+        <div class="form-group">
+            <label for="patientName" style="color:#fff;"><b>Patient Name</b></label>
+            <input type="text" class="form-control" th:value="${PatientDetails.patientName}" id="patientName" placeholder="Enter patient name" th:field="*{patientName}" required>
+            <p th:if="${#fields.hasErrors('patientName')}" th:errors="*{patientName}" class="text-danger"></p>
+        </div>
+       
+        <div class="form-group">
+            <label for="contactNumber" style="color:#fff;"><b>Contact Number</b></label>
+            <input type="text" class="form-control" th:value="${PatientDetails.contactNumber}" id="contactNumber" placeholder="Enter contact number" name="contactNumber" required>
+        	 <p th:each="e : ${#fields.errors('contactNumber')}" th:text="${e}" style="color:red;"></p>
+        </div>
+        <div class="form-group">
+            <label for="email" style="color:#fff;"><b>Email</b></label>
+            <input type="email" class="form-control" th:value="${PatientDetails.email}" id="email" placeholder="Enter email" name="email" required>
+            <p th:each="e : ${#fields.errors('email')}" th:text="${e}" style="color:red;"></p>
+        </div>
+        <div class="form-group">
+            <label for="medicalProblem" style="color:#fff;"><b>Medical Problem</b></label>
+            <textarea class="form-control" th:value="${PatientDetails.medicalProblem}" id="medicalProblem" rows="3" placeholder="Describe the medical problem" name="medicalProblem" required></textarea>
+             <p th:each="e : ${#fields.errors('medicalProblem')}" th:text="${e}" style="color:red;"></p>
+        </div>
+        <div class="form-group">
+            <label for="medicalHistory" style="color:#fff;"><b>Medical History</b></label>
+            <textarea class="form-control" th:value="${PatientDetails.medicalHistory}" id="medicalHistory" rows="3" placeholder="Enter medical history" name="medicalHistory" required></textarea>
+             <p th:each="e : ${#fields.errors('medicalHistory')}" th:text="${e}" style="color:red;"></p>
+        </div>
+        <div class="text-center">
+        <button type="submit" class="btn btn-outline-primary btn-block my-2">Proceed</button>
+        </div>
+    </form>
+      </div>
+    </div>
+  </div>
+
+</div>
+	</section>
+</body>
+</html>

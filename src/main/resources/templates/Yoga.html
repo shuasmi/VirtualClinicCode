@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{base::layout(~{::section})}">
+<head>
+	<meta charset="UTF-8" />
+	<title>Yoga</title>
+	 <style>
+    .video-container {
+      position: relative;
+      padding-bottom: 56.25%; /* 16:9 aspect ratio */
+      height: 0;
+      overflow: hidden;
+    }
+    
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+    
+    .overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 1); /* Adjust the transparency by changing the last value */
+    }
+  </style>
+</head>
+<body>
+	<section>
+	<div style="position: relative;
+	background-image:url('/img/yogaimg.jpg');
+	background-size: cover; /* or contain, or specific values */
+    background-repeat: no-repeat;
+    background-position: center center;  ">
+    <div class="overlay">
+	<h1 class="text-center" style="color:brown;">Yoga</h1>
+	
+    <div class="videopage text-center">
+    <div th:each="video : ${videos}">
+    <div class="vicon mt-5">
+  <div class="row justify-content-center">
+  <div class="videotitle">
+  <h5 class="card-title" th:text="${video.title}"></h5>
+  </div>
+    <div class="col-lg-4 col-md-6 mb-4">
+      <div class="video-container">
+        <div class="embed-responsive embed-responsive-16by9">
+                    		
+          <iframe class="embed-responsive-item" th:src="${video.url}" allowfullscreen></iframe>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+   
+   <!-- Pagination -->
+   
+   <div class="d-flex justify-content-center">
+	<nav aria-label="Page navigation example">
+  <ul class="pagination">
+    <li th:if="${currentPage != 0}" class="page-item"><a th:href="@{'/Patient/Yoga/'+${currentPage-1}}" class="page-link" href="#">Previous</a></li>
+    
+    <li th:classappend="${currentPage==i-1?'active':''}" th:each="i: ${#numbers.sequence(1,totalPages)}" class="page-item"><a th:href="@{'/Patient/Yoga/'+${i-1}}" class="page-link" href="#"><span th:text="${i}"></span></a></li>
+    
+    <li th:if="${currentPage+1 != totalPages}" class="page-item"><a th:href="@{'/Patient/Yoga/'+${currentPage+1}}" class="page-link" href="#">Next</a></li>
+  </ul>
+</nav>
+</div>
+
+</div>
+</div>
+	</section>
+</body>
+</html>

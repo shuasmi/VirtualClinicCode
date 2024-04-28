@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Appointment Booked Successfully</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <div class="paycontainer">
+    <div class="row justify-content-center mt-5">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-body">
+            <h3 class="card-title text-center">Appointment Booked Successfully</h3>
+            <p class="card-text text-center">Your appointment has been successfully booked.</p>
+            <p class="card-text text-center">Your appointment details will be sent to your email shortly.</p>
+            
+            <div class="text-center">
+              <a th:href="@{/saiclinic/home2}" class="btn btn-primary">Go To Home Page</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
